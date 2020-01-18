@@ -1,0 +1,368 @@
+\documentclass{article}
+
+\usepackage[french]{babel} 
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+
+
+\usepackage{float}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
+%Dessins plz
+
+ \usepackage[usenames,dvipsnames]{pstricks}
+ \usepackage{epsfig}
+ \usepackage{pst-grad} % For gradients
+ \usepackage{pst-plot} % For axes
+ \usepackage[space]{grffile} % For spaces in paths
+ \usepackage{etoolbox} % For spaces in paths
+ \makeatletter % For spaces in paths
+ \patchcmd\Gread@eps{\@inputcheck#1 }{\@inputcheck"#1"\relax}{}{}
+ \makeatother
+
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+%\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problème \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problème \arabic{#1} (suite)}{Suite du problème \arabic{#1} à la page suivante\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problème \arabic{#1} (suite)}{Suite du problème \arabic{#1} à la page suivante\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problème \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problème \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problème \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Devoir\ 2}
+\newcommand{\hmwkDueDate}{19 janvier 2020}
+\newcommand{\hmwkClass}{\ \ IFT 2105}
+\newcommand{\hmwkClassTime}{}%Section 
+\newcommand{\hmwkClassInstructor}{Professeur: Gena Hahn}
+\newcommand{\hmwkAuthorName}{\textbf{Elizabeth Michel}\\*                                     \textbf{Mathieu Perron}}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Pour\ le\ \hmwkDueDate\ à 16:30 }\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Partie \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+
+%floor and ceiling functions
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+%\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Contradiction et limites
+\newcommand{\absurde}{\rightarrow \leftarrow}
+\newcommand{\tend}{\rightarrow}
+\newcommand{\tendUnif}{\xrightarrow{\text{unif}}}
+%make this work
+%\newcommand{\par}[1]{\xrightarrow{\text{#1}}}
+
+
+
+% ensembles
+\newcommand{\naturel}{\mathbb{N}}
+\newcommand{\entier}{\mathbb{Z}}
+\newcommand{\rationnel}{\mathbb{Q}}
+\newcommand{\reel}{\mathbb{R}}
+\newcommand{\complexe}{\mathbb{C}}
+\newcommand{\compl}[1]{\overline{#1}}
+\newcommand{\e}{\varepsilon}
+\let\emptyset\varnothing
+
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\dy}{\mathrm{d}y}
+\newcommand{\dt}{\mathrm{d}t}
+
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+
+%lul
+\newcommand{\shrug}[1][]{%
+\begin{tikzpicture}[baseline,x=0.8\ht\strutbox,y=0.8\ht\strutbox,line width=0.125ex,#1]
+\def\arm{(-2.5,0.95) to (-2,0.95) (-1.9,1) to (-1.5,0) (-1.35,0) to (-0.8,0)};
+\draw \arm;
+\draw[xscale=-1] \arm;
+\def\headpart{(0.6,0) arc[start angle=-40, end angle=40,x radius=0.6,y radius=0.8]};
+\draw \headpart;
+\draw[xscale=-1] \headpart;
+\def\eye{(-0.075,0.15) .. controls (0.02,0) .. (0.075,-0.15)};
+\draw[shift={(-0.3,0.8)}] \eye;
+\draw[shift={(0,0.85)}] \eye;
+% draw mouth
+\draw (-0.1,0.2) to [out=15,in=-100] (0.4,0.95); 
+\end{tikzpicture}}
+
+
+%graphes
+\renewcommand{\theenumii}{\arabic{enumii}}
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\ifff}{\leftrightarrow}
+\newcommand{\Poly}{\mbox{\bf P}}
+\newcommand{\NP}{\mbox{\bf NP}}
+\newcommand{\NPC}{\mbox{\bf NPC}}
+\newcommand{\CNP}{\mbox{\bf Co-NP}}
+\newcommand{\R}{\mbox{\bf R}}
+\newcommand{\RE}{\mbox{\bf RE}}
+\newcommand{\donne}{\stackrel{\hspace{-3pt}*}{|\hspace{-5pt}-\hspace{-5pt}-\
+}}
+\newcommand{\Cay}{{\rm Cay}}
+\newcommand{\Ind}{{\rm Ind}}
+\newcommand{\Si}{\Sigma}
+\newcommand{\SST}{\Si^*}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\cc}{\c{c}}
+\newcommand{\cC}{\c{C}}
+\newtheorem{cor}{Corollaire}
+\newtheorem{obs}{Observation}
+\newtheorem{con}{Convention}
+\newtheorem{dfn}{D\'efinition}
+\newtheorem{thm}{Th\'eor\`eme}
+\newtheorem{lem}{Lemme}
+\newtheorem{prop}{Proposition}
+\newtheorem{prob}{Probl\`eme}
+\newtheorem{ex}{Exercise}
+\newtheorem{rem}{Remarque}
+\newtheorem{algo}{Algorithme}
+\newcommand{\bd}{\begin{dfn}}
+\newcommand{\ed}{\end{dfn}}
+\newcommand{\bt}{\begin{thm}}
+\newcommand{\et}{\end{thm}}
+\newcommand{\bl}{\begin{lem}}
+\newcommand{\el}{\end{lem}}
+\newcommand{\bp}{\begin{prop}}
+\newcommand{\ep}{\end{prop}}
+\newcommand{\bpb}{\begin{prob}}
+\newcommand{\epb}{\end{prob}}
+\newcommand{\bobs}{\begin{obs}}
+\newcommand{\eobs}{\end{obs}}
+\newcommand{\bex}{\begin{ex}}
+\newcommand{\eex}{\end{ex}}
+\newcommand{\br}{\begin{rem}}
+\newcommand{\er}{\end{rem}}
+\newcommand{\ba}{\begin{algo}}
+\newcommand{\ea}{\end{algo}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\bcon}{\begin{con}}
+\newcommand{\econ}{\end{con}}
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\la}{\label}
+\newcommand{\bcor}{\begin{cor}}
+\newcommand{\ecor}{\end{cor}}
+\newcommand{\bq}{\begin{quote}}
+\newcommand{\eq}{\end{quote}}
+
+\newcommand{\re}{{\mathbb R}}
+\newcommand{\rep}{{\mathbb R}^{> 0}}
+\newcommand{\renn}{{\mathbb R}^{\geq 0}}
+\newcommand{\nat}{{\mathbb N}}
+\newcommand{\intg}{{\mathbb Z}}
+\newcommand{\intgp}{\intg^{>0)}}
+\newcommand{\intgn}{\intg^{<0)}}
+\newcommand{\intgnp}{\intg^{\geq 0}}
+\newcommand{\intgnn}{\intg^{\leq 0}}
+\newcommand{\barr}{\overline}
+\newcommand{\np}{\mbox{{\it NP}}}
+\newcommand{\npc}{\mbox{{\it NPC}}}
+\newcommand{\cnp}{\mbox{{\it co-NP}}}
+\newcommand{\p}{\mbox{{\it P}}}
+\newcommand{\cp}{\mbox{{\it co-P}}}
+\newcommand{\twobox}{\marginpar{\huge {$\Box$ \hspace{0.5cm}$\Box$} }} 
+\newcommand{\repbox}{\marginpar{{\Large \begin{tabular}{|c|}\hline \ \ \
+\\ \hline \end{tabular}}} } 
+\newcommand{\ssi}{si et seulement si }
+\renewcommand{\theprob}{\thesection.\arabic{prob}}
+\newcommand{\diam}{{\rm diam}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\cha}{cha\^\i ne}
+\newcommand{\ecc}{{\rm ec}}
+\newcommand{\vcc}{{\rm vc}}
+
+
+
+
+
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+
+\pagebreak
+
+
+\begin{homeworkProblem}
+\begin{center}
+    \textit{Donnez un exemple de langage fini et un autre de langage infini}
+\end{center}
+Soit l'alphabet $\sum= \{a\}$.
+\begin{center}
+Langage fini: $L = \{a\}$\\ 
+Langage infini: $L_2 = \Sigma^*=  \{a^n\big| n \in \naturel\}$
+\end{center}
+Le premier a trivialement une cardinalité finie et pour le second, on a $|L_2| = |\naturel| =\infty$ comme voulu.  
+
+\end{homeworkProblem}
+\begin{homeworkProblem}
+
+\begin{center}
+    \textit{Est-ce que $(L^*)^*=L^*$?}
+\end{center}
+
+
+\textit{Note}: L'étoile de Kleene transforme $L$ en monoïde sous l'opération de la concaténation de mots ( $\e$ est le neutre et on a la fermeture par définition de $L^*$)\\
+
+La solution a été retirée pour éviter que le document circule et gâche la question pour des étudiants qui feront le cours dans les prochaines années.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+\textbf{Exemples de notation:}
+\begin{gather*}
+    L^* = \bigcup_{k\in \naturel} L^k\\
+    \Sigma = \{a,b,c\}\\
+    w = a_1a_2\dots a_n \qquad \qquad \forall i \in [n],  a_i \in \Sigma 
+\end{gather*}
+
+\textbf{Exemple de preuve}\\
+Montrons que \[\sum_{k=1}^n = \frac{n(n+1)}{2}\]
+\begin{proof}\hfill \break
+\textit{par induction}\hfill \break
+
+\underline{cas de base} : $k=1$
+\[\frac{1(1+1)}{2} = \frac{2}{2} = 1 \]
+
+\underline{pas inductif}
+\begin{gather*}
+    \sum_{k=1}^{n+1} = \sum_{k=1}^{n} + n+1\\
+    \xRightarrow{H.I} = \frac{n(n+1)}{2} + n + 1\\
+    \intertext{je vais sauter l'arithmétique}
+    = \frac{(n+1)(n+2)}{2}
+\end{gather*}
+Comme voulu\\
+Par induction, on a bien que $\frac{n(n+1)}{2}$
+
+
+\end{proof}
+
+\end{homeworkProblem}
+
+
+\end{document}
